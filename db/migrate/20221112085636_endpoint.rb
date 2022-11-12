@@ -1,8 +1,5 @@
 class Endpoint < ActiveRecord::Migration[7.0]
   def change
-    drop_table :endpoints
-    drop_table :responses
-
     create_table :endpoints do |t|
       t.string :endpoint_type
       t.string :verb
