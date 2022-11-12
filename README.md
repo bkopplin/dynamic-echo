@@ -28,11 +28,11 @@ An Echo Server that servers dynamic mock endpoints.
    ```
 
 # Usage
-We'll start by querying the existing endpoints. 
+Let's start by querying for existing endpoints:
 ```
 curl "http://localhost:3000/endpoints" -X GET
 ```
-There are no endpoints yet, hence we're getting an empty array. Let's add some endpoints!
+You should get an empty array because there are no endpoints yet. Let's change that! Create an endpoint using the following command.
 ```
 curl --request POST \
   --url http://localhost:3000/endpoints \
@@ -47,30 +47,42 @@ curl --request POST \
             "response": {
                 "code": 200,
                 "headers": {},
-                "body": "{ \"message\": \"Hello, world\" }"
+                "body": "Hello World"
             }
         }
     }
 }'
 ```
+When you run `curl "http://localhost:3000/endpoints" -X GET` again, you should now see one endpoint.
 
-# Usage Instructions
-Things you may want to cover:
+Let's access this endpoint.
+```
+curl "http://localhost:3000/greetings" -X GET
+```
+You can also update the endpoint:
+```
+curl --request PATCH \
+  --url http://localhost:3000/endpoints/1 \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "data": {
+        "type": "endpoint",
+        "id": "1",
+        "attributes": {
+            "verb": "POST",
+            "path": "/gretings",
+            "response": {
+              "code": 501,
+              "headers": {},
+              "body": "Hi there"
+            }
+        }
+    }
+}'
+```
+Or delete the endpoint all togeher:
+```
+curl DELETE http://localhost:3000/endpoints/1 -X DELETE
+```
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

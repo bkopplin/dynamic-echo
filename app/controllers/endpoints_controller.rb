@@ -12,7 +12,7 @@ class EndpointsController < ApplicationController
   def create
     filtered_params = endpoint_params  
     attr = endpoint_attributes
-    
+ 
     endpoint = Endpoint.new( 
       endpoint_type: filtered_params[:type],   
       path: attr[:path], 
