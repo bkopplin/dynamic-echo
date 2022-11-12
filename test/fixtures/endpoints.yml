@@ -22,7 +22,7 @@ three:
   id: 3
   endpoint_type: "endpoint"
   verb: "GET"
-  path: "/greeting"
+  path: "/one/two/three"
   res_code: 200
   res_headers: "Accept-Encoding: gzip"
   res_body: ""

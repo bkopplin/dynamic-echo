@@ -40,7 +40,6 @@ class EndpointFlowTest < ActionDispatch::IntegrationTest
   end
 
   # Update
-
   test "Should not update a non-existing endpoint" do
     patch "/endpoints/42000"
     assert_equal 404, status # Not Found
@@ -72,20 +71,28 @@ class EndpointFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "Responds with not found if the endpoint to be deleted doesn't exist" do
-    # delete "/endpoints/42000"
-    # assert_equal 404, status # Not Found
+    delete "/endpoints/42000"
+    assert_equal 404, status # Not Found
   end
 
   # Dynamic Endpoints
   test "Should not access a non-existent endpoint" do
-
+    get "/not-existant"
+    assert_equal 404, status # Not Found
   end
 
-  test "Should access an existing endpoint" do
-    
+  test "access a valid endpoint" do
+    get "/languages"
+    assert_equal 200, status # Created
   end
 
   test "Should not access a valid path with the wrong verb" do
+    delete "/languages"
+    assert_equal 404, status # Not Found
+  end
 
+  test "Should not access partial paths" do
+    get "/one/two"
+    assert_equal 404, status # Not Found
   end
 end

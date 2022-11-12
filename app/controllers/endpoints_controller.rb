@@ -13,20 +13,20 @@ class EndpointsController < ApplicationController
     filtered_params = endpoint_params  
     attr = endpoint_attributes
     
-    @endpoint = Endpoint.new( 
-      endpoint_type: filtered_params[:type], 
-      verb: attr[:verb], 
+    endpoint = Endpoint.new( 
+      endpoint_type: filtered_params[:type],   
       path: attr[:path], 
+      verb: attr[:verb], 
       res_code: attr[:response][:code],
       res_headers: attr[:response][:headers],
       res_body: attr[:response][:body]
     )
-   
+
     # Attempt to save endpoint. Show errors if validation fails
-    if @endpoint.save
-      render json: {data: @endpoint.to_hash}, status: :created
+    if endpoint.save
+      render json: {data: endpoint.to_hash}, status: :created
     else
-      render_errors()
+      render_errors endpoint
     end
   end
 
@@ -42,8 +42,9 @@ class EndpointsController < ApplicationController
     attr = endpoint_attributes
 
     # Check if the update can be done successfully
-    endpoint.id = data[:id]
+    # endpoint.id = data[:id]
     update_success = endpoint.update( 
+      id: data[:id],
       endpoint_type: data[:type], 
       verb: attr[:verb], 
       path: attr[:path], 
@@ -51,7 +52,6 @@ class EndpointsController < ApplicationController
       res_headers: attr[:response][:headers],
       res_body: attr[:response][:body]
     )
-    puts "update_success #{update_success}"
     if !update_success
       return render_errors endpoint  
     end
@@ -71,6 +71,18 @@ class EndpointsController < ApplicationController
     # Delete endpoint
     endpoint.delete
     render json: {}, status: :no_content
+  end
+
+  # Handle dynamically defined endpoints
+  def custom 
+    # Check if endpoint exists
+    endpoint = Endpoint.where(verb: request.method, path: request.path)[0]
+    if endpoint.nil?
+      return render_single_error :not_found, "Requested page '#{request.path}' does not exist"
+    end
+
+    # Return endpoint
+    render json: endpoint.res_body, status: endpoint.res_code
   end
 
   private

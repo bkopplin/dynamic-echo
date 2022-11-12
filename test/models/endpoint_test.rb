@@ -38,4 +38,13 @@ class EndpointTest < ActiveSupport::TestCase
     endpoint = Endpoint.first
     assert endpoint.update verb: "PATCH"
   end
+
+  test "Should not duplicate ids" do
+    endpoint = Endpoint.first
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      endpoint.update id: 2
+    end
+  end
+
+  
 end
