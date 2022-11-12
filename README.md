@@ -70,7 +70,7 @@ curl --request PATCH \
         "id": "1",
         "attributes": {
             "verb": "POST",
-            "path": "/gretings",
+            "path": "/greetings",
             "response": {
               "code": 501,
               "headers": {},
@@ -80,9 +80,9 @@ curl --request PATCH \
     }
 }'
 ```
-Or delete the endpoint all togeher:
+Finally, let's delete the endpoint all togeher:
 ```
-curl DELETE http://localhost:3000/endpoints/1 -X DELETE
+curl http://localhost:3000/endpoints/1 -X DELETE
 ```
 
 
