@@ -1,6 +1,6 @@
 # Dynamic Echo
 
-An Echo Server that servers dynamic mock endpoints. 
+An Echo Server that serves dynamic mock endpoints. Written in Ruby using Ruby on Rails
   
 # Dependencies
 
@@ -10,15 +10,16 @@ An Echo Server that servers dynamic mock endpoints.
 
 # Local Deployment
 1. Make sure the dependencies above are met.
-2. Clone this repository: 
+2. Set up the repository 
    ```
+   # Clone & cd
    git clone https://github.com/bkopplin/dynamic-echo.git
-   ```
-3. Run database migrations: 
-   ```
+   cd dynamic-echo
+   
+   # Run database migrations: 
    bin/rails db:migrate RAILS_ENV=development
    ```
-4. [Optional] Run the test suite 
+4. [Optional] Run the test suite: 
    ```
    bin/rails test
    ```
