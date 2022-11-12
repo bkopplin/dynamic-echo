@@ -19,11 +19,11 @@ An Echo Server that serves dynamic mock endpoints. Written in Ruby using Ruby on
    # Run database migrations: 
    bin/rails db:migrate RAILS_ENV=development
    ```
-4. [Optional] Run the test suite: 
+3. [Optional] Run the test suite: 
    ```
    bin/rails test
    ```
-5. Start the server (http://localhost:3000 by default): 
+4. Start the server (http://localhost:3000 by default): 
    ```
    bin/rails server
    ```

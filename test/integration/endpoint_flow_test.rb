@@ -95,4 +95,25 @@ class EndpointFlowTest < ActionDispatch::IntegrationTest
     get "/one/two"
     assert_equal 404, status # Not Found
   end
+
+  test "Create and access an endpoint" do
+    post "/endpoints", params: { data: {
+      type: "endpoint",
+      attributes: {
+        verb: "GET",
+        path: "/ping",
+        response: {
+          code: 200,
+          headers: {},
+          body: "pong"
+        }
+      }
+    }}, as: :json
+    assert_equal "/ping", Endpoint.last.path
+    assert_equal 201, status
+    
+    get "/ping"
+    assert_equal "pong", response.body
+    assert_equal 200, status
+  end
 end
