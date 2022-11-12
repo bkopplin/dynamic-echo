@@ -1,0 +1,28 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  endpoint_type: "endpoint"
+  verb: "GET"
+  path: "/languages"
+  res_code: 200
+  res_headers: {}
+  res_body: "['de', 'en','fr']"
+
+two:
+  id: 2
+  endpoint_type: "endpoint"
+  verb: "POST"
+  path: "/languages"
+  res_code: 400
+  res_headers: {"Accept-Language": "de-DE"}
+  res_body: ""
+
+three:
+  id: 3
+  endpoint_type: "endpoint"
+  verb: "GET"
+  path: "/greeting"
+  res_code: 200
+  res_headers: "Accept-Encoding: gzip"
+  res_body: ""
